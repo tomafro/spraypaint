@@ -1,9 +1,10 @@
-name: spraypaint
-summary: Rails tagging in a can
-author: Tom Ward (tomafro)
-email: tom@popdog.net
-homepage: http://github.com/tomafro/spraypaint
-plugin: http://github.com/tomafro/spraypaint.git
-license: MIT
-version: 0.9.0
-rails_version: 2.3+
+--- 
+:version: 0.9.0
+:plugin: http://github.com/tomafro/spraypaint.git
+:author: Tom Ward (tomafro)
+:license: MIT
+:summary: Rails tagging in a can
+:rails_version: 2.3+
+:email: tom@popdog.net
+:name: spraypaint
+:homepage: http://github.com/tomafro/spraypaint
