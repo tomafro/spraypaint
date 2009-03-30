@@ -6,7 +6,7 @@ require 'penknife/rake/plugin_tasks'
 Penknife::Rake::PluginTasks.new do |plugin|
   plugin.plugin_root = File.dirname(File.expand_path(__FILE__))
   plugin.name = 'spraypaint'
-  plugin.summary = 'Rails tagging in a can'
+  plugin.summary = 'Simple tagging in a can'
   plugin.authors = ['Tom Ward (tomafro)']
   plugin.email = 'tom@popdog.net'
   plugin.homepage = 'http://github.com/tomafro/spraypaint'

@@ -1,4 +1,4 @@
-# = Spraypaint - simple to use rails tagging in a can
+# = Spraypaint - simple tagging in a can
 #
 # == Getting started
 #
