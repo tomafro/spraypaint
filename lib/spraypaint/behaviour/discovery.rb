@@ -1,20 +1,8 @@
 module Spraypaint::Behaviour::Discovery
   def self.included(base)
     unless base == parent
-      base.named_scope :tagged_with, lambda {|*tag|
-        tags = base.tag_sanitizer.sanitize_array([*tag])
-        
-        {:conditions => %{
-          EXISTS (
-            SELECT 1 FROM #{Spraypaint::Model::Tag.table_name}, #{Spraypaint::Model::Tagging.table_name}
-            WHERE #{Spraypaint::Model::Tagging.table_name}.target_id = #{base.table_name}.id
-            AND #{Spraypaint::Model::Tagging.table_name}.target_type = '#{base.base_class.name}'
-            AND #{Spraypaint::Model::Tag.table_name}.id = #{Spraypaint::Model::Tagging.table_name}.tag_id            
-            AND (#{Spraypaint::Model::Tag.tag_condition(tags)})
-            GROUP BY #{Spraypaint::Model::Tagging.table_name}.target_id 
-            HAVING count(distinct #{Spraypaint::Model::Tagging.table_name}.tag_id) = #{tags.size} 
-          )
-        }}
+      base.named_scope :tagged_with, lambda {|*tags|
+        base.spraypaint_condition_hash_for(tags)
       }
       
       base.extend(ClassMethods)
@@ -31,6 +19,21 @@ module Spraypaint::Behaviour::Discovery
       def frequency
         @tag_count
       end
+    end
+    
+    def spraypaint_condition_hash_for(tags)
+      tags = self.tag_sanitizer.sanitize_array([*tags])  
+      {:conditions => %{
+        EXISTS (
+          SELECT 1 FROM #{Spraypaint::Model::Tag.table_name}, #{Spraypaint::Model::Tagging.table_name}
+          WHERE #{Spraypaint::Model::Tagging.table_name}.target_id = #{self.table_name}.id
+          AND #{Spraypaint::Model::Tagging.table_name}.target_type = '#{self.base_class.name}'
+          AND #{Spraypaint::Model::Tag.table_name}.id = #{Spraypaint::Model::Tagging.table_name}.tag_id            
+          AND (#{Spraypaint::Model::Tag.tag_condition(tags)})
+          GROUP BY #{Spraypaint::Model::Tagging.table_name}.target_id 
+          HAVING count(distinct #{Spraypaint::Model::Tagging.table_name}.tag_id) = #{tags.size} 
+        )
+      }}
     end
     
     def tags(options = {})
