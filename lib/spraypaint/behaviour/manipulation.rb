@@ -12,7 +12,7 @@ module Spraypaint::Behaviour::Manipulation
   end
   
   def tags=(tags)
-    write_attribute('tags', self.class.tag_sanitizer.sanitize([*tags]))
+    write_attribute('tags', self.class.tag_sanitizer.sanitize_array([*tags]))
   end
   
   def tag_string

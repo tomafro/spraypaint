@@ -2,7 +2,7 @@ module Spraypaint::Behaviour::Discovery
   def self.included(base)
     unless base == parent
       base.named_scope :tagged_with, lambda {|*tag|
-        tags = base.tag_sanitizer.sanitize([*tag])
+        tags = base.tag_sanitizer.sanitize_array([*tag])
         
         {:conditions => %{
           EXISTS (
