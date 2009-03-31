@@ -2,9 +2,8 @@ module Spraypaint::Behaviour::Discovery
   def self.included(base)
     unless base == parent
       base.named_scope :tagged_with, lambda {|*tag|
-        tags = [*tag].collect do |t|
-          base.tag_sanitizer.sanitize(t)
-        end.compact.uniq
+        tags = base.tag_sanitizer.sanitize([*tag])
+        
         {:conditions => %{
           EXISTS (
             SELECT 1 FROM #{Spraypaint::Model::Tag.table_name}, #{Spraypaint::Model::Tagging.table_name}

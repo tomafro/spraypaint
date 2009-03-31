@@ -107,25 +107,25 @@ describe Spraypaint::Behaviour do
     end
     
     it "should sanitize tags" do
-      @it.class.tag_sanitizer.should_receive(:sanitize).with('unsanitized').and_return('sanitized')
+      @it.class.tag_sanitizer.should_receive(:sanitize_tag).with('unsanitized').and_return('sanitized')
       @it.tags = ['unsanitized']
       @it.tags.should == ['sanitized']
     end
     
     it "should remove duplicates that result from sanitization" do
-      @it.class.tag_sanitizer.stub!(:sanitize).and_return('clean')
+      @it.class.tag_sanitizer.stub!(:sanitize_tag).and_return('clean')
       @it.tags = ['unclean', 'dirty', 'filthy']
       @it.tags.should == ['clean']
     end
     
     it "should remove zero-length tags that result from sanitization" do
-      @it.class.tag_sanitizer.stub!(:sanitize).and_return('')
+      @it.class.tag_sanitizer.stub!(:sanitize_tag).and_return(nil)
       @it.tags = ['unclean', 'dirty', 'filthy']
       @it.tags.should == []
     end
     
     it "should remove nil tags that result from sanitization" do
-      @it.class.tag_sanitizer.stub!(:sanitize).and_return(nil)
+      @it.class.tag_sanitizer.stub!(:sanitize_tag).and_return(nil)
       @it.tags = ['unclean', 'dirty', 'filthy']
       @it.tags.should == []
     end
@@ -260,7 +260,7 @@ describe Spraypaint::Behaviour do
     end
     
     it "should sanitize tags before searching" do
-      Film.tag_sanitizer.stub!(:sanitize).and_return('clean')
+      Film.tag_sanitizer.stub!(:sanitize_tag).and_return('clean')
       Film.create! :name => 'No Country For Old Men', :tags => ['unclean']
       Film.tagged_with('dirty').size.should == 1
     end

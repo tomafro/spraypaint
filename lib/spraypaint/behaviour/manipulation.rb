@@ -12,7 +12,7 @@ module Spraypaint::Behaviour::Manipulation
   end
   
   def tags=(tags)
-    write_attribute('tags', sanitize_tags(tags))
+    write_attribute('tags', self.class.tag_sanitizer.sanitize([*tags]))
   end
   
   def tag_string
@@ -41,13 +41,6 @@ module Spraypaint::Behaviour::Manipulation
   end
   
   private
-  
-  def sanitize_tags(tags)
-    tags && tags.collect do |t| 
-      cleaned = self.class.tag_sanitizer.sanitize(t)
-      cleaned if cleaned && cleaned.size > 0
-    end.uniq.compact
-  end
   
   def create_or_update_with_spraypaint
     change = tags_change
