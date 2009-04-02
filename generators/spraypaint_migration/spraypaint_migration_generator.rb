@@ -6,7 +6,6 @@ class SpraypaintMigrationGenerator < Rails::Generator::NamedBase
   end
   
   def manifest
-    puts Spraypaint::Model::Tag.table_name
     record do |m|
       m.migration_template 'spraypaint_migration.rb', 'db/migrate'
     end
