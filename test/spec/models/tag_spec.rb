@@ -17,34 +17,4 @@ describe Spraypaint::Model::Tag do
       @it.should_not be_valid
     end
   end
-    # 
-    # describe '#sanitize' do
-    #   before(:each) do
-    #     @characters = Spraypaint.allowed_tag_characters
-    #   end
-    #   
-    #   after(:each) do
-    #     Spraypaint.allowed_tag_characters = @characters
-    #   end
-    #   
-    #   it "should strip surrounding whitespace from tag" do
-    #     @class.sanitize("    hello     ").should == "hello"
-    #   end
-    # 
-    #   it "should convert accented characters to their non-accented forms" do
-    #     @class.sanitize("fåçêtîous").should == "facetious"
-    #   end
-    # 
-    #   it "should remove all non-allowed characters" do
-    #     Spraypaint.allowed_tag_characters = /[acef]/ 
-    #     @class.sanitize("abcdefedcba").should == "acefeca"
-    #     Spraypaint.allowed_tag_characters = /[db]/ 
-    #     @class.sanitize("abcdefedcba").should == "bddb"
-    #   end
-    # 
-    #   it "should leave passed in tag unaltered" do
-    #     @class.sanitize(value = "    hello     ")
-    #     value.should == "    hello     "
-    #   end
-    # end
 end

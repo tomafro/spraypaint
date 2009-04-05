@@ -2,9 +2,22 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 
 describe Spraypaint::Behaviour do
   before(:each) do
-    redefine_models
-    Film.tag_with_spraypaint
-    Book.tag_with_spraypaint
+    build_model :books do
+      string :name
+      string :type
+      
+      tag_with_spraypaint
+    end
+    
+    build_model :non_fiction_books, :superclass => Book
+    build_model :novel, :superclass => Book
+    
+    build_model :films do
+      string :name
+      string :director
+      
+      tag_with_spraypaint
+    end
   end
 
   describe "(records initialized with no tags)" do
@@ -180,6 +193,9 @@ describe Spraypaint::Behaviour do
   end
   
   describe "(finding tags associated with a class of records)" do
+    before(:each) do
+    end
+    
     it "should return set of tags associated with individual records" do
       Film.create! :name => 'No Country For Old Men', :tags => ['coen brothers', 'josh brolin']
       Film.create! :name => 'W', :tags => ['oliver stone', 'josh brolin']
@@ -193,7 +209,7 @@ describe Spraypaint::Behaviour do
     end
     
     it "should limit tags found using STI subclasses" do
-      NonFiction.create! :name => 'The Wealth Of Nations', :tags => ['economics', 'adam smith']
+      NonFictionBook.create! :name => 'The Wealth Of Nations', :tags => ['economics', 'adam smith']
       Novel.create! :name => 'The Road', :tags => ['post apocalyptic', 'mccarthy']
       Book.tags.should == ['adam smith', 'economics', 'mccarthy', 'post apocalyptic']
       Novel.tags.should == ['mccarthy', 'post apocalyptic']

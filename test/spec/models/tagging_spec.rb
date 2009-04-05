@@ -8,8 +8,12 @@ describe Spraypaint::Model::Tagging do
   
   describe "(in general)" do
     before(:each) do
-      @it.tag = stub_model(Spraypaint::Model::Tag, :id => 3243)
-      @it.target = stub_model(Spraypaint::Model::Tag, :id => 1234)
+      build_model :books do
+        string :name
+      end
+      
+      @it.tag = Spraypaint::Model::Tag.create :name => 'a'
+      @it.target = Book.create :name => 'b'
     end
     
     it "should be valid with a tag and a target" do
