@@ -184,7 +184,7 @@ describe Spraypaint::Behaviour do
       @it = Book.new :name => 'Book 5'
     end
     
-    it "should reconstitue tag string from tags" do
+    it "should reconstruct tag string from tags" do
       @it.tag_string = "some   , tags, go  ,  here"
       @it.save!
       @it = Book.find(@it.id)
