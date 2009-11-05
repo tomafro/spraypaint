@@ -1,6 +1,6 @@
 $: << File.expand_path(File.join(File.dirname(__FILE__), "lib"))
 
-require 'spraypaint'
+require 'spraypaint/version'
 require 'spec/rake/spectask' rescue nil
 
 namespace :spraypaint do
