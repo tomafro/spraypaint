@@ -61,7 +61,7 @@ module Spraypaint::Behaviour::Manipulation
   
   module ClassMethods
     def tag_sanitizer
-      @tag_sanitizer ||= Spraypaint::DefaultSanitizer.new
+      @tag_sanitizer ||= Spraypaint::Sanitizer.new
     end
     
     def tag_sanitizer=(sanitizer)

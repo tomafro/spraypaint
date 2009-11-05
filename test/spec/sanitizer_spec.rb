@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-describe Spraypaint::DefaultSanitizer do
+describe Spraypaint::Sanitizer do
   describe '(with no arguments passed to constructor)' do
     before(:each) do
-      @it = Spraypaint::DefaultSanitizer.new
+      @it = Spraypaint::Sanitizer.new
     end
     
     it "should strip surrounding whitespace from tag" do
