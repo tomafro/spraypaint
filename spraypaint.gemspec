@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{spraypaint}
-  s.version = "1.0.1"
+  s.version = "1.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Ward"]
-  s.date = %q{2009-11-04}
+  s.date = %q{2009-11-05}
   s.description = %q{Simple tagging in a can}
   s.email = %q{tom@popdog.net}
   s.files = [
@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
      "MIT-LICENSE",
      "Rakefile",
      "TODO",
-     "VERSION.yml",
      "about.yml",
      "generators/spraypaint_migration/spraypaint_migration_generator.rb",
      "generators/spraypaint_migration/templates/spraypaint_migration.rb",
@@ -27,10 +26,11 @@ Gem::Specification.new do |s|
      "lib/spraypaint/behaviour/discovery.rb",
      "lib/spraypaint/behaviour/manipulation.rb",
      "lib/spraypaint/behaviour/persistence.rb",
-     "lib/spraypaint/default_sanitizer.rb",
      "lib/spraypaint/model/tag.rb",
      "lib/spraypaint/model/tagging.rb",
      "lib/spraypaint/sanitizer.rb",
+     "lib/spraypaint/sanitizer_support.rb",
+     "lib/spraypaint/version.rb",
      "rails/init.rb",
      "spraypaint.gemspec",
      "test/config/boot.rb",
@@ -38,14 +38,11 @@ Gem::Specification.new do |s|
      "test/config/environment.rb",
      "test/config/environments/test.rb",
      "test/db/schema.rb",
-     "test/spec/default_sanitizer_spec.rb",
      "test/spec/models/tag_spec.rb",
      "test/spec/models/tagging_spec.rb",
+     "test/spec/sanitizer_spec.rb",
      "test/spec/spec_helper.rb",
-     "test/spec/spraypaint_spec.rb",
-     "vendor/penknife/lib/penknife.rb",
-     "vendor/penknife/lib/penknife/rake.rb",
-     "vendor/penknife/lib/penknife/rake/plugin_tasks.rb"
+     "test/spec/spraypaint_spec.rb"
   ]
   s.homepage = %q{http://github.com/tomafro/spraypaint.git}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -57,9 +54,9 @@ Gem::Specification.new do |s|
      "test/config/environment.rb",
      "test/config/environments/test.rb",
      "test/db/schema.rb",
-     "test/spec/default_sanitizer_spec.rb",
      "test/spec/models/tag_spec.rb",
      "test/spec/models/tagging_spec.rb",
+     "test/spec/sanitizer_spec.rb",
      "test/spec/spec_helper.rb",
      "test/spec/spraypaint_spec.rb"
   ]

@@ -3,6 +3,8 @@ $: << File.expand_path(File.join(File.dirname(__FILE__), "lib"))
 require 'spraypaint/version'
 require 'spec/rake/spectask' rescue nil
 
+SPRAYPAINT_ROOT = File.dirname(__FILE__)
+
 namespace :spraypaint do
   begin
     require 'jeweler'
@@ -15,6 +17,8 @@ namespace :spraypaint do
       gemspec.homepage = "http://github.com/tomafro/spraypaint.git"
       gemspec.authors = ['Tom Ward']
     end
+    
+    Jeweler::GemcutterTasks.new
   rescue LoadError
     puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
   end
@@ -23,7 +27,7 @@ namespace :spraypaint do
     desc "Run specs for spraypaint"
     Spec::Rake::SpecTask.new(:spec) do |t|
       t.spec_opts = ["-f n -c"]
-      t.spec_files = FileList["#{File.dirname(__FILE__)}/test/spec/**/*_spec.rb"]
+      t.spec_files = FileList["#{SPRAYPAINT_ROOT}/test/spec/**/*_spec.rb"]
     end
   else
     task :spec do
@@ -33,7 +37,7 @@ namespace :spraypaint do
   
   task 'about.yml' do
     gemspec = Rake.application.jeweler_tasks.jeweler.gemspec
-    File.open(File.join(File.dirname(__FILE__), "about.yml"), 'w+') do |f|
+    File.open(File.join(SPRAYPAINT_ROOT, "about.yml"), 'w+') do |f|
       YAML.dump({
         :name => gemspec.name,
         :summary => gemspec.summary,
@@ -47,6 +51,13 @@ namespace :spraypaint do
       }, f)
     end
   end
+  
+  task 'tag' do
+    gemspec = Rake.application.jeweler_tasks.jeweler.gemspec    
+    `cd #{SPRAYPAINT_ROOT}; git tag -a "v#{gemspec.version.to_s}" -m "Releasing spraypaint version #{gemspec.version.to_s}"`
+  end
+  
+  task 'release' => ['spraypaint:spec', 'spraypaint:about.yml', 'spraypaint:tag', 'spraypaint:gemcutter:release']
 end
 
 task 'default' => ['spraypaint:spec', 'spraypaint:features']
