@@ -1,7 +1,7 @@
 module Spraypaint::Behaviour::Discovery
   def self.included(base)
     unless base == parent
-      base.named_scope :tagged_with, lambda {|*tags|
+      base.scope :tagged_with, lambda {|*tags|
         base.spraypaint_condition_hash_for(tags)
       }
       

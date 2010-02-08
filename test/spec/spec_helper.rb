@@ -1,8 +1,17 @@
 ENV["RAILS_ENV"] = "test"
 RAILS_ENV = "test"
 
-require File.expand_path(File.join(File.dirname(__FILE__), '../config/environment.rb'))
+require 'active_record'
+ActiveRecord::Base.establish_connection(
+  adapter: "sqlite3",
+  database: ":memory:",
+  pool: 5,
+  timeout: 5000
+) 
 require File.expand_path(File.dirname(__FILE__) + '/../db/schema')
+require 'spraypaint'
+
+Spraypaint.activate_plugin
 
 module ActsAsFu
   def build_model(name, options={}, &block)

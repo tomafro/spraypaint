@@ -216,7 +216,7 @@ describe Spraypaint::Behaviour do
     end
     
     it "should respect scoped queries" do
-      Film.named_scope 'directed_by', lambda {|director|
+      Film.scope 'directed_by', lambda {|director|
         {:conditions => {:director => director}}
       }
       

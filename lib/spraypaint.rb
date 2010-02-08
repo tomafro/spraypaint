@@ -46,7 +46,15 @@
 #     => ['musical', 'french', 'threesome', 'bicycle', 'piano', 'gangster']
 # 
 
+require 'active_support/all'
+
 module Spraypaint
+  autoload :Behaviour, 'spraypaint/behaviour'
+  autoload :Model, 'spraypaint/model'
+  autoload :Sanitizer, 'spraypaint/sanitizer'
+  autoload :SanitizerSupport, 'spraypaint/sanitizer_support'
+  autoload :Version, 'spraypaint/version'
+  
   def self.activate_plugin
     ActiveRecord::Base.extend(ClassMethods)
   end

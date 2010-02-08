@@ -10,7 +10,7 @@ class Spraypaint::Sanitizer
   def sanitize_tag(tag)
     return nil if tag.nil?
     string = tag.strip
-    string = string.mb_chars.normalize(:d).gsub(/[^\0-\x80]/, '')
+    string = ActiveSupport::Inflector.transliterate(string) unless RUBY_VERSION >= '1.9'
     string = string.scan(self.allowed_characters).join
     string.empty? ? nil : string.to_s
   end
